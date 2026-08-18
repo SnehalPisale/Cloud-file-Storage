@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vault — Cloud File Storage</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">▣</span>
+      <span class="brand-name">Vault</span>
+    </div>
+    <div id="session-info" class="session-info hidden">
+      <span id="session-user"></span>
+      <button id="logout-btn" class="btn btn-ghost">Sign out</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- LOGIN VIEW -->
+    <section id="login-view" class="panel login-panel">
+      <h1>Sign in</h1>
+      <p class="muted">Use the admin credentials from your backend .env file.</p>
+      <form id="login-form">
+        <label for="username">Username</label>
+        <input id="username" type="text" autocomplete="username" required />
+
+        <label for="password">Password</label>
+        <input id="password" type="password" autocomplete="current-password" required />
+
+        <button type="submit" class="btn btn-primary">Sign in</button>
+        <p id="login-error" class="error hidden"></p>
+      </form>
+    </section>
+
+    <!-- APP VIEW -->
+    <section id="app-view" class="app-view hidden">
+
+      <div id="dropzone" class="dropzone">
+        <input type="file" id="file-input" hidden />
+        <div class="dropzone-inner">
+          <span class="dropzone-icon">↑</span>
+          <p><strong>Drop a file here</strong> or <button id="browse-btn" class="link-btn">browse</button></p>
+          <p class="muted small">Images, PDFs, Office docs, text, zip · up to 10&nbsp;MB</p>
+        </div>
+      </div>
+      <div id="upload-status" class="upload-status hidden"></div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <h2>Your files</h2>
+          <button id="refresh-btn" class="btn btn-ghost small">Refresh</button>
+        </div>
+
+        <table class="file-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Size</th>
+              <th>Uploaded</th>
+              <th class="actions-col">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="file-list">
+          </tbody>
+        </table>
+        <p id="empty-state" class="muted small hidden">No files yet — upload something above.</p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Share link modal -->
+  <div id="share-modal" class="modal hidden">
+    <div class="modal-card">
+      <h3>Shareable link</h3>
+      <p class="muted small">Anyone with this link can download the file until it expires.</p>
+      <input id="share-url" type="text" readonly />
+      <div class="modal-row">
+        <label for="share-expiry" class="muted small">Expires in</label>
+        <select id="share-expiry">
+          <option value="3600">1 hour</option>
+          <option value="86400">24 hours</option>
+          <option value="604800">7 days</option>
+        </select>
+      </div>
+      <div class="modal-actions">
+        <button id="copy-share-btn" class="btn btn-primary">Copy link</button>
+        <button id="close-share-btn" class="btn btn-ghost">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
